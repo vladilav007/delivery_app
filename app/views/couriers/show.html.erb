@@ -1,2 +1,38 @@
-<h1>Couriers#show</h1>
-<p>Find me in app/views/couriers/show.html.erb</p>
+<h1><%= @courier.name %></h1>
+
+<p>Email: <%= @courier.email %></p>
+
+<ul>
+  <li><%= link_to "Edit Courier", edit_courier_path(@courier) %></li>
+  <li><%= link_to "Destroy", courier_path(@courier),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+
+<h2>Orders:</h2>
+<% @courier.packages.each do |package| %>
+  <p>
+    <strong>tracking_number:</strong>
+    <%= package.tracking_number %>
+  </p>
+
+  <p>
+    <strong>delivery_status:</strong>
+    <%= package.delivery_status %>
+  </p>
+<% end %>
+
+<h2>Add order:</h2>
+<%= form_with model: [ @courier, @courier.packages.build ] do |form| %>
+  <p>
+    <%= form.label :tracking_number %><br>
+    <%= form.text_field :tracking_number %>
+  </p>
+  <p>
+    <%= form.label :delivery_status %><br>
+    <%= form.check_box :delivery_status %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

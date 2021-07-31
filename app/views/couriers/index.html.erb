@@ -1,2 +1,14 @@
-<h1>Couriers#index</h1>
-<p>Find me in app/views/couriers/index.html.erb</p>
+<h1>Vorobei Vladyslav. Delivery app for Yalantis Ruby School</h1>
+
+<h2>Couriers:</h2>
+
+<ul>
+  <% @couriers.each do |courier| %>
+    <li>
+      <%= link_to courier.name, courier %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<h3><%= link_to "New Courier", new_courier_path %></h3>
